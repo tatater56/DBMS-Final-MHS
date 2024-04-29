@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - Management and Reporting</title>
+</head>
+
+<body>
+    <header>
+        <h1>Morris Health Services</h1>
+        <h2>Management Reporting</h2>
+    </header>
+    <main>
+        
+    
+    <h2>Facility Details</h2>
+    <form action="/facility_report" method="post">
+        <label for="fac_id">Facility ID:</label><br>
+        <input type="text" id="fac_id" name="fac_id"><br>
+        <label for="fac_name">Name:</label><br>
+        <input type="text" id="fac_name" name="fac_name"><br>
+        <label for="fac_address">Address:</label><br>
+        <input type="text" id="fac_address" name="fac_address"><br>
+        <label for="fac_city">City:</label><br>
+        <input type="text" id="fac_city" name="fac_city"><br>
+        <label for="fac_state">State:</label><br>
+        <input type="text" id="fac_state" name="fac_state"><br>
+        <label for="fac_zip">Zip:</label><br>
+        <input type="text" id="fac_zip" name="fac_zip"><br>
+        <label for="fac_size">Size:</label><br>
+        <input type="text" id="fac_size" name="fac_size"><br>
+        <label for="fac_type">Type:</label><br>
+        <input type="text" id="fac_type" name="fac_type"><br><br>
+        <input type="submit" value="Generate Facility Report">
+    </form>
+    
+    <h2>Office Details</h2>
+    <form action="/office_report" method="post">
+        <label for="fac_id_office">Facility ID:</label><br>
+        <input type="text" id="fac_id_office" name="fac_id_office"><br>
+        <label for="office_count">Office Count:</label><br>
+        <input type="text" id="office_count" name="office_count"><br><br>
+        <input type="submit" value="Generate Office Report">
+    </form>
+    
+    <h2>OPS Details</h2>
+    <form action="/ops_report" method="post">
+        <label for="fac_id_ops">Facility ID:</label><br>
+        <input type="text" id="fac_id_ops" name="fac_id_ops"><br>
+        <label for="room_count">Room Count:</label><br>
+        <input type="text" id="room_count" name="room_count"><br>
+        <label for="p_code">P_Code:</label><br>
+        <input type="text" id="p_code" name="p_code"><br>
+        <label for="desc">Description:</label><br>
+        <input type="text" id="desc" name="desc"><br><br>
+        <input type="submit" value="Generate OPS Report">
+    </main>
+    <footer>
+        <p><a href="/">⏎ Return to main menu</a></p>
+    </footer>
+</body>
+
+</html>

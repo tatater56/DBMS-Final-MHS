@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - Employee and Facility Management</title>
+</head>
+
+<body>
+    <header>
+        <h1>Morris Health Services</h1>
+        <h2>Employee and Facility Management</h2>
+    </header>
+    <main>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>EMPID</th>
+                    <th>FName</th>
+                    <th>Minit</th>
+                    <th>LName</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>FacID</th>
+                    <th>JobClass</th>
+                    <th>SSN</th>
+                    <th>Salary</th>
+                    <th>HireDate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in emploees %}
+                <tr>
+                    <td>{{ employee[0] }}</td>
+                    <td>{{ employee[1] }}</td>
+                    <td>{{ employee[2] }}</td>
+                    <td>{{ employee[3] }}</td>
+                    <td>{{ employee[4] }}</td>
+                    <td>{{ employee[5] }}</td>
+                    <td>{{ employee[6] }}</td>
+                    <td>{{ employee[7] }}</td>
+                    <td>{{ employee[8] }}</td>
+                    <td>{{ employee[9] }}</td>
+                    <td>{{ employee[10] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <footer>
+        <p><a href="/">⏎ Return to main menu</a></p>
+    </footer>
+</body>
+
+</html>

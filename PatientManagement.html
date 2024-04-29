@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - Patient Management (appointments, procedures and billing)</title>
+</head>
+
+<body>
+    <header>
+        <h1>Morris Health Services</h1>
+        <h2>Patient Management (appointments, procedures and billing)</h2>
+    </header>
+    <main>
+        <h3> Create new record </h3>
+        <form action="/add_patient" method="post">
+            <form action="/add_patient" method="post">
+                <label for="P_id">Patient ID:</label><br>
+                <input type="text" id="P_id" name="P_id"><br>
+                <label for="FName">First Name:</label><br>
+                <input type="text" id="FName" name="FName"><br>
+                <label for="Minit">Middle Initial:</label><br>
+                <input type="text" id="Minit" name="Minit"><br>
+                <label for="LName">Last Name:</label><br>
+                <input type="text" id="LName" name="LName"><br>
+                <label for="street">Street:</label><br>
+                <input type="text" id="street" name="street"><br>
+                <label for="zip">Zip:</label><br>
+                <input type="text" id="zip" name="zip"><br>
+                <label for="ins_id">Insurance ID:</label><br>
+                <input type="text" id="ins_id" name="ins_id"><br>
+                <label for="primary_doctor_id">Primary Doctor ID:</label><br>
+                <input type="text" id="primary_doctor_id" name="primary_doctor_id"><br><br>
+                <input type="submit" value="Submit">
+        </form>
+        
+        <h2>Make Appointment</h2>
+        <form action="/add_appointment" method="post">
+            
+        <label for="Doctor_ID">Doctor ID:</label><br>
+        <input type="text" id="Doctor_ID" name="Doctor_ID"><br>
+        <label for="P_id">P_id:</label><br>
+        <input type="text" id="P_id" name="P_id"><br>
+        <label for="datetime">Date and Time:</label><br>
+        <input type="datetime-local" id="datetime" name="datetime"><br>
+        <label for="InvID">Invoice ID:</label><br>
+        <input type="text" id="InvID" name="invoice_id"><br><br>
+        <input type="submit" value="Submit">
+        </form>
+    </main>
+    <footer>
+        <p><a href="/">⏎ Return to main menu</a></p>
+    </footer>
+</body>
+
+</html>
