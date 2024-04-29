@@ -7,19 +7,21 @@ USE `mhs`;
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
   `EmpID` int(11) NOT NULL AUTO_INCREMENT,
-  `FName` varchar(50) NOT NULL,
-  `Minit` varchar(50) NOT NULL,
-  `LName` varchar(50) NOT NULL,
-  `Street` varchar(50) NOT NULL,
-  `City` varchar(50) NOT NULL,
-  `State` varchar(50) NOT NULL,
-  `Zip` varchar(50) NOT NULL,
-  `FacID` int(11) NOT NULL,
+  `FName` varchar(50) DEFAULT NULL,
+  `Minit` varchar(50) DEFAULT NULL,
+  `LName` varchar(50) DEFAULT NULL,
+  `Street` varchar(50) DEFAULT NULL,
+  `City` varchar(50) DEFAULT NULL,
+  `State` varchar(50) DEFAULT NULL,
+  `Zip` varchar(50) DEFAULT NULL,
+  `FacID` int(11) DEFAULT NULL,
   `JobClass` varchar(50) NOT NULL,
-  `SSN` int(11) NOT NULL,
-  `Salary` varchar(50) NOT NULL,
-  `HireDate` date NOT NULL,
-  PRIMARY KEY (`EmpID`)
+  `SSN` int(11) DEFAULT NULL,
+  `Salary` varchar(50) DEFAULT NULL,
+  `HireDate` date DEFAULT NULL,
+  PRIMARY KEY (`EmpID`),
+  KEY `FK_employee_facility` (`FacID`),
+  CONSTRAINT `FK_employee_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE SET NULL ON UPDATE CASCADE,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping structure for table mhs.admin
