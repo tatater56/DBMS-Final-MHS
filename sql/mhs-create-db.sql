@@ -3,6 +3,40 @@ DROP DATABASE IF EXISTS `mhs`;
 CREATE DATABASE `mhs` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `mhs`;
 
+-- Dumping structure for table mhs.facility
+DROP TABLE IF EXISTS `facility`;
+CREATE TABLE `facility` (
+  `FacID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) DEFAULT NULL,
+  `Address` varchar(50) DEFAULT NULL,
+  `City` varchar(50) DEFAULT NULL,
+  `State` varchar(50) DEFAULT NULL,
+  `Zip` varchar(50) DEFAULT NULL,
+  `Size` int(11) DEFAULT NULL,
+  `FType` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`FacID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping structure for table mhs.office
+DROP TABLE IF EXISTS `office`;
+CREATE TABLE `office` (
+  `FacID` int(11) NOT NULL,
+  `Office_Count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`FacID`),
+  CONSTRAINT `FK_office_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping structure for table mhs.ops
+DROP TABLE IF EXISTS `ops`;
+CREATE TABLE `ops` (
+  `FacID` int(11) NOT NULL,
+  `Room_Count` int(11) DEFAULT NULL,
+  `P_code` varchar(50) DEFAULT NULL,
+  `Description` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`FacID`),
+  CONSTRAINT `FK_ops_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Dumping structure for table mhs.employee
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
@@ -21,7 +55,7 @@ CREATE TABLE `employee` (
   `HireDate` date DEFAULT NULL,
   PRIMARY KEY (`EmpID`),
   KEY `FK_employee_facility` (`FacID`),
-  CONSTRAINT `FK_employee_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `FK_employee_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping structure for table mhs.admin
@@ -102,40 +136,6 @@ CREATE TABLE `doctortreatspatient` (
   KEY `FK_doctortreatspatient_patient` (`P_id`),
   CONSTRAINT `FK_doctortreatspatient_doctor` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctor` (`EmpID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_doctortreatspatient_patient` FOREIGN KEY (`P_id`) REFERENCES `patient` (`P_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dumping structure for table mhs.facility
-DROP TABLE IF EXISTS `facility`;
-CREATE TABLE `facility` (
-  `FacID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(50) DEFAULT NULL,
-  `Address` varchar(50) DEFAULT NULL,
-  `City` varchar(50) DEFAULT NULL,
-  `State` varchar(50) DEFAULT NULL,
-  `Zip` varchar(50) DEFAULT NULL,
-  `Size` int(11) DEFAULT NULL,
-  `FType` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`FacID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dumping structure for table mhs.office
-DROP TABLE IF EXISTS `office`;
-CREATE TABLE `office` (
-  `FacID` int(11) NOT NULL,
-  `Office_Count` int(11) DEFAULT NULL,
-  PRIMARY KEY (`FacID`),
-  CONSTRAINT `FK_office_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dumping structure for table mhs.ops
-DROP TABLE IF EXISTS `ops`;
-CREATE TABLE `ops` (
-  `FacID` int(11) NOT NULL,
-  `Room_Count` int(11) DEFAULT NULL,
-  `P_code` varchar(50) DEFAULT NULL,
-  `Description` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`FacID`),
-  CONSTRAINT `FK_ops_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping structure for table mhs.invoice

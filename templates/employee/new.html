@@ -15,10 +15,54 @@
         {% endif %}
         
         <h1>Morris Health Services</h1>
-        <h2>Add new employee - {{JobClass}}</h2>
+        <h2>Add New Employee ({{JobClass}})</h2>
     </header>
     <main>
-        <p>Page content goes here.</p>
+        <form action="/api/NewEmployee" method="post">
+            <label for="FName">FName:</label><br>
+            <input type="text" id="FName" name="FName"><br>
+
+            <label for="Minit">Minit:</label><br>
+            <input type="text" id="Minit" name="Minit"><br>
+
+            <label for="LName">LName:</label><br>
+            <input type="text" id="LName" name="LName"><br>
+
+            <label for="Street">Street:</label><br>
+            <input type="text" id="Street" name="Street"><br>
+
+            <label for="City">City:</label><br>
+            <input type="text" id="City" name="City"><br>
+
+            <label for="State">State:</label><br>
+            <input type="text" id="State" name="State"><br>
+
+            <label for="Zip">Zip:</label><br>
+            <input type="text" id="Zip" name="Zip"><br>
+
+            <label for="replace">replace:</label><br>
+            <input type="text" id="replace" name="replace"><br>
+
+            <label for="replace">replace:</label><br>
+            <input type="text" id="replace" name="replace"><br>
+
+            <label for="replace">replace:</label><br>
+            <input type="text" id="replace" name="replace"><br>
+
+            <label for="replace">replace:</label><br>
+            <input type="text" id="replace" name="replace"><br>
+
+            <label for="replace">replace:</label><br>
+            <input type="text" id="replace" name="replace"><br>
+
+            <label for="replace">replace:</label><br>
+            <input type="text" id="replace" name="replace"><br>
+
+            <label for="replace">replace:</label><br>
+            <input type="text" id="replace" name="replace"><br>
+
+            
+        </form>
     </main>
     <footer>
         <p><a href="/EmployeeFacilityManagement">⏎ Return to Employee Facility Management</a></p>
