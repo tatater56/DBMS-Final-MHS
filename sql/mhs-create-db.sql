@@ -105,7 +105,7 @@ CREATE TABLE `doctortreatspatient` (
 -- Dumping structure for table mhs.facility
 DROP TABLE IF EXISTS `facility`;
 CREATE TABLE `facility` (
-  `FaclD` int(11) NOT NULL AUTO_INCREMENT,
+  `FacID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) DEFAULT NULL,
   `Address` varchar(50) DEFAULT NULL,
   `City` varchar(50) DEFAULT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE `facility` (
   `Zip` varchar(50) DEFAULT NULL,
   `Size` int(11) DEFAULT NULL,
   `FType` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`FaclD`)
+  PRIMARY KEY (`FacID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping structure for table mhs.office
@@ -122,7 +122,7 @@ CREATE TABLE `office` (
   `FacID` int(11) NOT NULL,
   `Office_Count` int(11) DEFAULT NULL,
   PRIMARY KEY (`FacID`),
-  CONSTRAINT `FK_office_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FaclD`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_office_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping structure for table mhs.ops
@@ -133,7 +133,7 @@ CREATE TABLE `ops` (
   `P_code` varchar(50) DEFAULT NULL,
   `Description` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`FacID`),
-  CONSTRAINT `FK_ops_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FaclD`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_ops_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping structure for table mhs.invoice
@@ -156,16 +156,16 @@ CREATE TABLE `makesappointment` (
   `Doctor_ID` int(11) NOT NULL,
   `P_id` int(11) NOT NULL,
   `Date_Time` datetime NOT NULL,
-  `FaclD` int(11) NOT NULL,
+  `FacID` int(11) NOT NULL,
   `InvID` int(11) DEFAULT NULL,
   `Cost` decimal(20,2) DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`Doctor_ID`,`P_id`,`Date_Time`),
-  KEY `FK_makesappointment_facility` (`FaclD`),
+  KEY `FK_makesappointment_facility` (`FacID`),
   KEY `FK_makesappointment_invoice` (`InvID`),
   KEY `FK_makesappointment_patient` (`P_id`),
   CONSTRAINT `FK_makesappointment_doctor` FOREIGN KEY (`Doctor_ID`) REFERENCES `doctor` (`EmpID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_makesappointment_facility` FOREIGN KEY (`FaclD`) REFERENCES `facility` (`FaclD`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_makesappointment_facility` FOREIGN KEY (`FacID`) REFERENCES `facility` (`FacID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_makesappointment_invoice` FOREIGN KEY (`InvID`) REFERENCES `invoice` (`InvID`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FK_makesappointment_patient` FOREIGN KEY (`P_id`) REFERENCES `patient` (`P_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

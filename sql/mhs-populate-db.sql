@@ -1,6 +1,6 @@
 
 -- Populate facilities
-INSERT INTO `facility` (`FaclD`, `Name`, `Address`, `City`, `State`, `Zip`, `Size`, `FType`) VALUES
+INSERT INTO `facility` (`FacID`, `Name`, `Address`, `City`, `State`, `Zip`, `Size`, `FType`) VALUES
 (1, 'Anytown General Hospital', '1 Main St', 'Anytown', 'CA', '54321', 100, 'OPS'),
 (2, 'Anytown Urgent Care', '5 Main St', 'Anytown', 'CA', '54321', 500, 'OPS'),
 (3, 'Anytown Medical Office', '6 Main St', 'Anytown', 'CA', '54321', 200, 'Office');
@@ -69,6 +69,6 @@ INSERT INTO `doctortreatspatient` (`Doctor_ID`, `P_id`) VALUES
 (5, 3);
 
 -- Populate makes appointment
-INSERT INTO `makesappointment` (`Doctor_ID`, `P_id`, `Date_Time`, `FaclD`, `Description`) VALUES
+INSERT INTO `makesappointment` (`Doctor_ID`, `P_id`, `Date_Time`, `FacID`, `Description`) VALUES
 (1, 1, '2024-05-10 10:00:00', 1, 'Cardiology Consultation'),
 (5, 2, '2024-05-15 14:00:00', 2, 'Physical Therapy Session');
