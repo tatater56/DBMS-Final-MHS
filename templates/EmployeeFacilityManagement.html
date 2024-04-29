@@ -17,10 +17,57 @@
         <h2>Employee and Facility Management</h2>
     </header>
     <main>
-        <p>Page content goes here.</p>
-        <p>
-            {{ employees }}
-        </p>
+        <section>
+            <h3>Employee details</h3>
+            <a href="/NewEmployee">🗐 Add new employee</a>
+            <br>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>EmpID</th>
+                        <th>FName</th>
+                        <th>Minit</th>
+                        <th>LName</th>
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                        <th>FacID</th>
+                        <th>JobClass</th>
+                        <th>SSN</th>
+                        <th>Salary</th>
+                        <th>HireDate</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee["EmpID"] }}</td>
+                        <td>{{ employee["FName"] }}</td>
+                        <td>{{ employee["Minit"] }}</td>
+                        <td>{{ employee["LName"] }}</td>
+                        <td>{{ employee["Street"] }}</td>
+                        <td>{{ employee["City"] }}</td>
+                        <td>{{ employee["State"] }}</td>
+                        <td>{{ employee["Zip"] }}</td>
+                        <td>{{ employee["FacID"] }}</td>
+                        <td>{{ employee["JobClass"] }}</td>
+                        <td>{{ employee["SSN"] }}</td>
+                        <td>{{ employee["Salary"] }}</td>
+                        <td>{{ employee["HireDate"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateEmployee/{{employee['EmpID']}}">🖆 Update</a>
+                                <a href="/DeleteEmployee/{{employee['EmpID']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
     </main>
     <footer>
         <p><a href="/">⏎ Return to main menu</a></p>

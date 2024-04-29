@@ -7,7 +7,7 @@ def get_all():
     cnx = db.get_connection()
 
     if(cnx and cnx.is_connected()):
-        with cnx.cursor() as cursor:
+        with cnx.cursor(dictionary = True) as cursor:
             cursor.execute("select * from employee;")
             results = cursor.fetchall()
         cnx.close()

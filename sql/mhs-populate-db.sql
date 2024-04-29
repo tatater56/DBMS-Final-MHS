@@ -20,12 +20,11 @@ INSERT INTO `employee` (`EmpID`, `FName`, `Minit`, `LName`, `Street`, `City`, `S
 (1, 'John', 'A', 'Doe', '123 Main St', 'Anytown', 'CA', '12345', 1, 'Doctor', 123456789, '100000.00', '2023-01-01'),
 (2, 'Jane', 'B', 'Smith', '456 Elm St', 'Anytown', 'CA', '54321', 2, 'Nurse', 987654321, '80000.00', '2024-01-01'),
 (3, 'David', 'C', 'Lee', '789 Maple St', 'Anytown', 'CA', '98765', 2, 'Other HCP', 246801357, '70000.00', '2022-01-01'),
-(4, 'Samantha', 'D', 'Kacpersky', '555 Some Rd', 'Anytown', 'CA', '54321', 3, 'Admin', 246801357, '70000.00', '2020-01-01'),
-
-(5, 'Jake', 'A', 'Doe', '123 Main St', 'Anytown', 'CA', '12345', 2, 'Doctor', 123456789, '100000.00', '2023-01-01'),
-(6, 'Jannette', 'B', 'Smith', '456 Elm St', 'Anytown', 'CA', '54321', 1, 'Nurse', 987654321, '80000.00', '2024-01-01'),
-(7, 'Dennis', 'C', 'Lee', '789 Maple St', 'Anytown', 'CA', '98765', 1, 'Other HCP', 246801357, '70000.00', '2022-01-01'),
-(8, 'Sally', 'D', 'Kacpersky', '555 Some Rd', 'Anytown', 'CA', '54321', 3, 'Admin', 246801357, '70000.00', '2020-01-01');
+(4, 'Samantha', 'D', 'Kacpersky', '555 Some Rd', 'Anytown', 'CA', '54321', 3, 'Admin', 246801354, '70000.00', '2020-01-01'),
+(5, 'Jake', 'E', 'Doe', '123 Main St', 'Anytown', 'CA', '12345', 2, 'Doctor', 123456788, '100000.00', '2023-01-01'),
+(6, 'Jannette', 'F', 'Smith', '456 Elm St', 'Anytown', 'CA', '54321', 1, 'Nurse', 987654320, '80000.00', '2024-01-01'),
+(7, 'Dennis', 'G', 'Lee', '789 Maple St', 'Anytown', 'CA', '98765', 1, 'Other HCP', 246801356, '70000.00', '2022-01-01'),
+(8, 'Sally', 'H', 'Kacpersky', '555 Some Rd', 'Anytown', 'CA', '54321', 3, 'Admin', 246801355, '70000.00', '2020-01-01');
 
 -- Populate employee jobclasses
 INSERT INTO `doctor` (`EmpID`, `Speciality`, `BC_Date`) VALUES
@@ -58,7 +57,11 @@ INSERT INTO `patient` (`P_id`, `FName`, `Minit`, `LName`, `Street`, `City`, `Sta
 (1, 'Alice', 'A', 'Brown', '123 Main St', 'Anytown', 'CA', '12345', 1, 1),
 (2, 'Bob', 'B', 'Jones', '456 Elm St', 'Anytown', 'CA', '54321', 2, 5),
 (3, 'Arnold', 'C', 'Smith', '777 Oak Rd', 'Anytown', 'CA', '65432', 2, 1),
-(4, 'Hein', 'D', 'Kim', '555 Willow Ave', 'Anytown', 'CA', '99999', 1, 5);
+(4, 'Hein', 'D', 'Kim', '555 Willow Ave', 'Anytown', 'CA', '99999', 1, 5),
+(5, 'Ann', 'E', 'Brown', '123 Main St', 'Anytown', 'CA', '12345', 1, 1),
+(6, 'Bernard', 'F', 'Jones', '456 Elm St', 'Anytown', 'CA', '54321', 2, 5),
+(7, 'Alfred', 'G', 'Smith', '777 Oak Rd', 'Anytown', 'CA', '65432', 2, 1),
+(8, 'Renjie', 'H', 'Liu', '555 Willow Ave', 'Anytown', 'CA', '99999', 1, 5);
 
 -- Populate doctor treats patient
 INSERT INTO `doctortreatspatient` (`Doctor_ID`, `P_id`) VALUES

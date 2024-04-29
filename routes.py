@@ -6,12 +6,15 @@ import database.db as db
 
 from typing import Optional
 
-### Menus ###
+### Pages ###
 
 @app.route('/')
 def main_page():
     return render_template('MainMenu.html',
                             message = request.args.get("message", default = None))
+
+
+### Employee pages ###
 
 @app.route('/EmployeeFacilityManagement')
 def efm_page():
@@ -19,15 +22,35 @@ def efm_page():
                             message = request.args.get("message", default = None),
                             employees = employee.get_all())
 
+@app.route('/NewEmployee')
+def new_employee_page():
+    return "new employee"
+
+@app.route('/UpdateEmployee/<EmpID>')
+def update_employee_page(EmpID):
+    return "update employee " + EmpID
+
+@app.route('/DeleteEmployee/<EmpID>')
+def delete_employee_page(EmpID):
+    return "delete employee " + EmpID
+
+
+
+### Patient pages ###
+
 @app.route('/PatientManagement')
 def pm_page():
     return render_template('PatientManagement.html',
                             message = request.args.get("message", default = None))
 
+
+### Management pages ###
+
 @app.route('/ManagementReporting')
 def mr_page():
     return render_template('ManagementReporting.html',
                             message = request.args.get("message", default = None))
+
 
 ### API ###
 
