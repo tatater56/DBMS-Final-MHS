@@ -3,12 +3,13 @@
 
 <head>
     <title>MHS - Patient Management (appointments, procedures and billing)</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
     <header>
         {% if(message) %}
-        <section style="background-color: yellow;">
+        <section class="message">
             <p>Message: {{ message }}</p>
         </section>
         {% endif %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - New employee</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <header>
+        {% if(message) %}
+        <section class="message">
+            <p>Message: {{ message }}</p>
+        </section>
+        {% endif %}
+        
+        <h1>Morris Health Services</h1>
+        <h2>Add new employee - {{JobClass}}</h2>
+    </header>
+    <main>
+        <p>Page content goes here.</p>
+    </main>
+    <footer>
+        <p><a href="/EmployeeFacilityManagement">⏎ Return to Employee Facility Management</a></p>
+    </footer>
+</body>
+
+</html>

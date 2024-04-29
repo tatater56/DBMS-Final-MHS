@@ -6,7 +6,7 @@ import database.db as db
 
 from typing import Optional
 
-### Pages ###
+### Main menu ###
 
 @app.route('/')
 def main_page():
@@ -14,7 +14,7 @@ def main_page():
                             message = request.args.get("message", default = None))
 
 
-### Employee pages ###
+### Employee ###
 
 @app.route('/EmployeeFacilityManagement')
 def efm_page():
@@ -22,17 +22,29 @@ def efm_page():
                             message = request.args.get("message", default = None),
                             employees = employee.get_all())
 
-@app.route('/NewEmployee')
-def new_employee_page():
-    return "new employee"
+@app.route('/NewEmployee/<JobClass>')
+def new_employee_page(JobClass):
+    return render_template('employee/new.html', JobClass=JobClass)
+
+@app.route('/api/NewEmployee')
+def api_new_employee():
+    return redirect(url_for('efm_page', message='New employee created'))
 
 @app.route('/UpdateEmployee/<EmpID>')
 def update_employee_page(EmpID):
-    return "update employee " + EmpID
+    return render_template('employee/update.html', employee=employee.get(EmpID))
+
+@app.route('/api/UpdateEmployee')
+def api_update_employee():
+    return redirect(url_for('efm_page', message='Employee updated'))
 
 @app.route('/DeleteEmployee/<EmpID>')
 def delete_employee_page(EmpID):
-    return "delete employee " + EmpID
+    return render_template('employee/delete.html', employee=employee.get(EmpID))
+
+@app.route('/api/DeleteEmployee')
+def api_delete_employee():
+    return redirect(url_for('efm_page', message='Employee deleted'))
 
 
 
@@ -52,7 +64,7 @@ def mr_page():
                             message = request.args.get("message", default = None))
 
 
-### API ###
+### DB ###
 
 @app.route('/api/CreateDB')
 def api_create_db():

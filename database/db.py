@@ -20,11 +20,11 @@ def get_connection() -> Optional[MySQLConnection]:
 
 def create_db():
     print("create_db() called!")
-    execute_script("sql\mhs-create-db.sql")
+    execute_script("sql/mhs-create-db.sql")
 
 def populate_db():
     print("populate_db() called!")
-    execute_script("sql\mhs-populate-db.sql")
+    execute_script("sql/mhs-populate-db.sql")
 
 def execute_script(file_path):
     cnx = get_connection()

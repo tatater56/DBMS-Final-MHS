@@ -3,12 +3,13 @@
 
 <head>
     <title>MHS - Employee and Facility Management</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
     <header>
         {% if(message) %}
-        <section style="background-color: yellow;">
+        <section class="message">
             <p>Message: {{ message }}</p>
         </section>
         {% endif %}
@@ -19,10 +20,17 @@
     <main>
         <section>
             <h3>Employee details</h3>
-            <a href="/NewEmployee">🗐 Add new employee</a>
-            <br>
+            <details>
+                <summary>🗐 Add new employee</summary>
+                <ul>
+                    <li><a href="/NewEmployee/Doctor">Doctor</a></li>
+                    <li><a href="/NewEmployee/Nurse">Nurse</a></li>
+                    <li><a href="/NewEmployee/HCP">Other HCP</a></li>
+                    <li><a href="/NewEmployee/Admin">Admin</a></li>
+                </ul>
+            </details>
 
-            <table border="1">
+            <table>
                 <thead>
                     <tr>
                         <th>EmpID</th>
