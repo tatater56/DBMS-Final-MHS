@@ -7,11 +7,20 @@
 
 <body>
     <header>
+        {% if(message) %}
+        <section style="background-color: yellow;">
+            <p>Message: {{ message }}</p>
+        </section>
+        {% endif %}
+        
         <h1>Morris Health Services</h1>
         <h2>Employee and Facility Management</h2>
     </header>
     <main>
         <p>Page content goes here.</p>
+        <p>
+            {{ employees }}
+        </p>
     </main>
     <footer>
         <p><a href="/">⏎ Return to main menu</a></p>
