@@ -71,7 +71,7 @@ CREATE TABLE `admin` (
 DROP TABLE IF EXISTS `doctor`;
 CREATE TABLE `doctor` (
   `EmpID` int(11) NOT NULL,
-  `Speciality` varchar(50) DEFAULT NULL,
+  `Specialty` varchar(50) DEFAULT NULL,
   `BC_Date` date DEFAULT NULL,
   PRIMARY KEY (`EmpID`),
   CONSTRAINT `FK_doctor_employee` FOREIGN KEY (`EmpID`) REFERENCES `employee` (`EmpID`) ON DELETE CASCADE ON UPDATE CASCADE

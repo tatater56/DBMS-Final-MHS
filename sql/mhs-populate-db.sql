@@ -27,7 +27,7 @@ INSERT INTO `employee` (`EmpID`, `FName`, `Minit`, `LName`, `Street`, `City`, `S
 (8, 'Sally', 'H', 'Kacpersky', '555 Some Rd', 'Anytown', 'CA', '54321', 3, 'Admin', 246801355, '70000.00', '2020-01-01');
 
 -- Populate employee jobclasses
-INSERT INTO `doctor` (`EmpID`, `Speciality`, `BC_Date`) VALUES
+INSERT INTO `doctor` (`EmpID`, `Specialty`, `BC_Date`) VALUES
 (1, 'Cardiology', '2010-01-01'),
 (5, 'Pediatrics', '2016-01-01');
 
