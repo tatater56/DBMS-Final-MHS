@@ -1,6 +1,8 @@
 from flask import render_template, url_for, redirect, request
 from __main__ import app
 
+from database import db
+
 import routes.employee_facility_routes
 import routes.patient_management_routes
 import routes.management_reporting_routes

@@ -115,4 +115,27 @@ def update(employee):
     print("employee.update() called!")
 
 def delete(id):
-    print("employee.delete() called!")
+    employee = db.select('employee', 'EmpID', id)
+    job_class = employee.get('JobClass', None)
+    job_class_table = ''
+    
+    match job_class:
+        case 'Doctor':
+            job_class_table = 'doctor'
+
+        case 'Nurse':
+            job_class_table = 'nurse'
+
+        case 'Other HCP':
+            job_class_table = 'otherhcp'
+
+        case 'Admin':
+            job_class_table = 'admin'
+
+        case _:
+            job_class_table = None
+    
+    if(job_class_table):
+        db.delete(job_class_table, 'EmpID', id)
+
+    return db.delete('employee', 'EmpID', id)
