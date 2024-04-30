@@ -17,7 +17,10 @@ def efm_page():
                             doctors = employee.get_all_doctors(),
                             nurses = employee.get_all_nurses(),
                             admins = employee.get_all_admins(),
-                            hcps = employee.get_all_hcps())
+                            hcps = employee.get_all_hcps(),
+                            facilities = facility.get_all(),
+                            opses = facility.get_all_opses(),
+                            offices = facility.get_all_offices())
 
 
 # New employee

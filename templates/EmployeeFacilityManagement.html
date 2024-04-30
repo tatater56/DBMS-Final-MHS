@@ -18,7 +18,8 @@
         <h2>Employee and Facility Management</h2>
     </header>
     <main>
-        <section>
+        <details>
+            <summary><b>Employees</b></summary>
             <h3>Employee details</h3>
             <details>
                 <summary>🗐 Add new employee</summary>
@@ -177,7 +178,100 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </section>
+        </details>
+        <details>
+            <summary><b>Facilities</b></summary>
+            <h3>Facility details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>FacID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                        <th>Size</th>
+                        <th>FType</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for facility in facilities %}
+                    <tr>
+                        <td>{{ facility["FacID"] }}</td>
+                        <td>{{ facility["Name"] }}</td>
+                        <td>{{ facility["Address"] }}</td>
+                        <td>{{ facility["City"] }}</td>
+                        <td>{{ facility["State"] }}</td>
+                        <td>{{ facility["Zip"] }}</td>
+                        <td>{{ facility["Size"] }}</td>
+                        <td>{{ facility["FType"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateFacility/{{facility['FacID']}}">🖆 Update</a>
+                                <a href="/DeleteFacility/{{facility['FacID']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>OPS details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>FacID</th>
+                        <th>Room_Count</th>
+                        <th>P_code</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ops in opses %}
+                    <tr>
+                        <td>{{ ops["FacID"] }}</td>
+                        <td>{{ ops["Room_Count"] }}</td>
+                        <td>{{ ops["P_code"] }}</td>
+                        <td>{{ ops["Description"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateFacility/{{ops['FacID']}}">🖆 Update</a>
+                                <a href="/DeleteFacility/{{ops['FacID']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Office details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>FacID</th>
+                        <th>Office_Count</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for office in offices %}
+                    <tr>
+                        <td>{{ office["FacID"] }}</td>
+                        <td>{{ office["Office_Count"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateFacility/{{office['FacID']}}">🖆 Update</a>
+                                <a href="/DeleteFacility/{{office['FacID']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </details>
     </main>
     <footer>
         <p><a href="/">⏎ Return to main menu</a></p>
