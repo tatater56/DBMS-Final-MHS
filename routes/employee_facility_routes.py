@@ -32,14 +32,13 @@ def new_employee_page(JobClass):
 def api_new_employee():
     form_dict = {k: v for k, v in request.form.items()}
     result = employee.create(form_dict)
-    messa
     if(result):
-        return redirect(url_for('efm_page', 
-                                message=f'New employee created (id:{result})'))
+        message = f'New employee created (id:{result})'
     else:
-        return redirect(url_for('efm_page',
-                                message='Error encountered while attempting to create employee!'))
+        message = 'Error encountered while attempting to create employee!'
 
+    return redirect(url_for('efm_page', 
+                        message=message))
 
 # Update employee
 
