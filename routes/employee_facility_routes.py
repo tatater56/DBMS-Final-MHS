@@ -12,7 +12,11 @@ import database.db as db
 def efm_page():
     return render_template('EmployeeFacilityManagement.html',
                             message = request.args.get("message", default = None),
-                            employees = employee.get_all())
+                            employees = employee.get_all(),
+                            doctors = employee.get_all_doctors(),
+                            nurses = employee.get_all_nurses(),
+                            admins = employee.get_all_admins(),
+                            hcps = employee.get_all_hcps())
 
 
 # New employee

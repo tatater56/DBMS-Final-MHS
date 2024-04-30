@@ -75,6 +75,108 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+            <h3>Doctor details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>EmpID</th>
+                        <th>Specialty</th>
+                        <th>BC_Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor["EmpID"] }}</td>
+                        <td>{{ doctor["Specialty"] }}</td>
+                        <td>{{ doctor["BC_Date"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateEmployee/{{doctor['EmpID']}}">🖆 Update</a>
+                                <a href="/DeleteEmployee/{{doctor['EmpID']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Nurse details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>EmpID</th>
+                        <th>Certification</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nurse in nurses %}
+                    <tr>
+                        <td>{{ nurse["EmpID"] }}</td>
+                        <td>{{ nurse["Certification"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateEmployee/{{nurse['EmpID']}}">🖆 Update</a>
+                                <a href="/DeleteEmployee/{{nurse['EmpID']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Other HCP details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>EmpID</th>
+                        <th>JobTitle</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hcp in hcps %}
+                    <tr>
+                        <td>{{ hcp["EmpID"] }}</td>
+                        <td>{{ hcp["JobTitle"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateEmployee/{{ hcp['EmpID'] }}">🖆 Update</a>
+                                <a href="/DeleteEmployee/{{ hcp['EmpID'] }}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Admin details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>EmpID</th>
+                        <th>JobTitle</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for admin in admins %}
+                    <tr>
+                        <td>{{ admin["EmpID"] }}</td>
+                        <td>{{ admin["JobTitle"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateEmployee/{{ admin['EmpID'] }}">🖆 Update</a>
+                                <a href="/DeleteEmployee/{{ admin['EmpID'] }}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </section>
     </main>
     <footer>
