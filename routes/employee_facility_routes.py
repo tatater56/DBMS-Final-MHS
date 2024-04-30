@@ -53,6 +53,32 @@ def api_update_employee():
     return redirect(url_for('efm_page',
                             message='Employee updated'))
 
+@app.route('/UpdateEmployeeJobClass/<EmpID>/<JobClass>')
+def update_employee_jobclass_page(EmpID, JobClass):
+    # Change 'HCP' to 'Other HCP'
+    JobClass = 'Other HCP' if JobClass == 'HCP' else JobClass
+
+    emp = employee.get(EmpID)
+    OldJobClass = emp.get('JobClass', None)
+
+    jobclass_data = {}
+    if JobClass == OldJobClass:
+        jobclass_data = employee.get_employee_jobclass_data(EmpID, JobClass)
+    
+    print("update_employee_jobclass_page called!\n"
+            f"{EmpID=}, {JobClass=}, {OldJobClass=}, {jobclass_data=}")
+
+    return render_template('employee/update_jobclass.html',
+                            EmpID=EmpID,
+                            OldJobClass=OldJobClass,
+                            NewJobClass=JobClass,
+                            jobclass_data=jobclass_data)
+
+@app.route('/api/UpdateEmployeeJobClass', methods=['POST'])
+def api_update_employee_jobclass():
+    return redirect(url_for('efm_page',
+                            message='Employee JobClass updated'))
+
 
 # Delete employee
 

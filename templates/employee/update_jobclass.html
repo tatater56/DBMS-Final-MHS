@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - Update employee job class</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <header>
+        {% if(message) %}
+        <section class="message">
+            <p>Message: {{ message }}</p>
+        </section>
+        {% endif %}
+        
+        <h1>Morris Health Services</h1>
+        <h2>Update Employee JobClass (EmpID:{{ EmpID }}, OldJobClass:{{ OldJobClass }}, NewJobClass:{{ NewJobClass }})</h2>
+    </header>
+    <main>
+        <h3>{{ NewJobClass }} details</h3>
+
+        <form action="/api/UpdateEmployeeJobClass" method="post">
+
+            {% if NewJobClass == 'Doctor' %}
+                <input type="hidden" id="JobClass" name="JobClass" value="Doctor">
+
+                <label for="Specialty">Specialty:</label><br>
+                <input type="text" id="Specialty" name="Specialty" value="{{ jobclass_data.get('Specialty', '') }}"><br><br>
+                
+                <label for="BC_Date">Board Certification Date:</label><br>
+                <input type="date" id="BC_Date" name="BC_Date" value="{{ jobclass_data.get('BC_Date', '') }}"><br><br>
+
+            {% elif NewJobClass == 'Nurse' %}
+                <input type="hidden" id="JobClass" name="JobClass" value="Nurse">
+
+                <label for="Certification">Certification:</label><br>
+                <input type="text" id="Certification" name="Certification" value="{{ jobclass_data.get('Certification', '') }}"><br><br>
+
+            {% elif NewJobClass == 'Other HCP' %}
+                <input type="hidden" id="JobClass" name="JobClass" value="Other HCP">
+
+                <label for="JobTitle">JobTitle:</label><br>
+                <input type="text" id="JobTitle" name="JobTitle" value="{{ jobclass_data.get('JobTitle', '') }}"><br><br>
+
+            {% elif NewJobClass == 'Admin' %}
+                <input type="hidden" id="JobClass" name="JobClass" value="Admin">
+
+                <label for="JobTitle">JobTitle:</label><br>
+                <input type="text" id="JobTitle" name="JobTitle" value="{{ jobclass_data.get('JobTitle', '') }}"><br><br>
+
+            {% else %}
+                <section class="message">Warning! Invalid JobClass: {{JobClass}}</section>
+
+            {% endif %}
+
+            <input type="submit" value="Update">
+        </form>
+    </main>
+    <footer>
+        <p><a href="/EmployeeFacilityManagement">⏎ Return to Employee Facility Management</a></p>
+    </footer>
+</body>
+
+</html>

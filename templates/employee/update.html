@@ -18,6 +18,17 @@
         <h2>Update Employee (EmpID:{{ employee['EmpID'] }}, JobClass:{{ employee['JobClass'] }})</h2>
     </header>
     <main>
+        <details>
+            <summary>🖆 Update JobClass?</summary>
+            <ul>
+                {% set JobClass, EmpID = employee['JobClass'], employee['EmpID'] %}
+
+                <li><a href="/UpdateEmployeeJobClass/{{ EmpID }}/Doctor">Doctor {{ '(update)' if JobClass=='Doctor' else '(change)' }}</a></li>
+                <li><a href="/UpdateEmployeeJobClass/{{ EmpID }}/Nurse">Nurse {{ '(update)' if JobClass=='Nurse' else '(change)' }}</a></li>
+                <li><a href="/UpdateEmployeeJobClass/{{ EmpID }}/HCP">Other HCP {{ '(update)' if JobClass=='Other HCP' else '(change)' }}</a></li>
+                <li><a href="/UpdateEmployeeJobClass/{{ EmpID }}/Admin">Admin {{ '(update)' if JobClass=='Admin' else '(change)' }}</a></li>
+            </ul>
+        </details>
         <form action="/api/UpdateEmployee" method="post">
             <label for="FName">FName:</label><br>
             <input type="text" id="FName" name="FName" value="{{ employee['FName'] }}"><br><br>
@@ -43,7 +54,7 @@
             <label for="FacID">FacID:</label><br>
             <select id="FacID" name="FacID">
                 {% for facility in facilities %}
-                    <option value="{{ facility['FacID'] }}">{{ facility['Name'] }} (id:{{ facility['FacID'] }})</option>
+                    <option value="{{ facility['FacID'] }}" {{ 'selected' if employee['FacID'] == facility['FacID'] else '' }}>{{ facility['Name'] }} (id:{{ facility['FacID'] }})</option>
                 {% endfor %}
             </select><br><br>
 
