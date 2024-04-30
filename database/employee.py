@@ -1,6 +1,6 @@
 import database.db as db
 
-from util import validate_date, validate_int
+from util import validate_date, validate_int, is_empty_string
 
 def get_all():
     return db.select_all('employee')
@@ -34,6 +34,33 @@ def get_nurse(EmpID):
 def get_hcp(EmpID):
     return db.select('otherhcp', 'EmpID', EmpID)
 
+
+def get_employee_jobclass_data(EmpID, JobClass):
+    if is_empty_string(EmpID) or is_empty_string(JobClass):
+        return {}
+    
+    job_class_table = ''
+    
+    match JobClass:
+        case 'Doctor':
+            job_class_table = 'doctor'
+
+        case 'Nurse':
+            job_class_table = 'nurse'
+
+        case 'Other HCP':
+            job_class_table = 'otherhcp'
+
+        case 'Admin':
+            job_class_table = 'admin'
+
+        case _:
+            job_class_table = None
+    
+    if(job_class_table):
+        return db.select(job_class_table, 'EmpID', EmpID)
+    else:
+        return {}
 
 
 def create(employee):

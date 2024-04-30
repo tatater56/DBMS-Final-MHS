@@ -45,7 +45,8 @@ def api_new_employee():
 @app.route('/UpdateEmployee/<EmpID>')
 def update_employee_page(EmpID):
     return render_template('employee/update.html',
-                            employee=employee.get(EmpID))
+                            employee = employee.get(EmpID),
+                            facilities = facility.get_all())
 
 @app.route('/api/UpdateEmployee', methods=['POST'])
 def api_update_employee():
