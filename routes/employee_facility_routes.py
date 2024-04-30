@@ -5,6 +5,7 @@ import database.employee as employee
 import database.facility as facility
 import database.db as db
 
+import util
 
 # Main page
 
@@ -61,13 +62,18 @@ def delete_employee_page(EmpID):
 
 @app.route('/api/DeleteEmployee/<EmpID>')
 def api_delete_employee(EmpID):
-    if(EmpID):
-        result = employee.delete(EmpID)
-        return redirect(url_for('efm_page',
-                                message='Employee deleted'))
-    else:
+    if(util.is_empty_string(EmpID)):
         return redirect(url_for('efm_page',
                                 message='Employee could not be deleted, no EmpID given'))
+    else:
+        result = ''
+        if employee.delete(EmpID):
+            result = f'Employee deleted (id:{EmpID})'
+        else:
+            result = f'Error encountered, could not delete employee (id:{EmpID})'
+        
+        return redirect(url_for('efm_page',
+                                message=result))
 
 
 # TODO: facilities
