@@ -69,9 +69,8 @@ def create(employee):
     if(not employee or not isinstance(employee, dict)):
         return False
     
-    job_class = employee.get('JobClass', '')
-    job_class_params = {}
-    job_class_table = ''
+    jobclass = employee.get('JobClass', '')
+    jobclass_data = {}
 
     # Need to set empty dates to None to satisfy DataError mysql exception (will insert NULL into database)
     # mysql.connector.errors.DataError: 1292 (22007): Incorrect date value: '' for column `mhs`.`employee`.`HireDate` at row 1
@@ -81,88 +80,108 @@ def create(employee):
     # mysql.connector.errors.DataError: 1366 (22007): Incorrect integer value: '' for column `mhs`.`employee`.`SSN` at row 1
     employee['SSN'] = validate_int(employee.get('SSN', None))
 
-    match job_class:
+    match jobclass:
         case 'Doctor':
-            job_class_params['Specialty'] = employee.pop('Specialty', None)
-            job_class_params['BC_Date'] = validate_date(employee.pop('BC_Date', None))
-            job_class_table = 'doctor'
+            jobclass_data['Specialty'] = employee.pop('Specialty', None)
+            jobclass_data['BC_Date'] = validate_date(employee.pop('BC_Date', None))
+            jobclass = 'doctor'
 
         case 'Nurse':
-            job_class_params['Certification'] = employee.pop('Certification', None)
-            job_class_table = 'nurse'
+            jobclass_data['Certification'] = employee.pop('Certification', None)
+            jobclass = 'nurse'
 
         case 'Other HCP':
-            job_class_params['JobTitle'] = employee.pop('JobTitle', None)
-            job_class_table = 'otherhcp'
+            jobclass_data['JobTitle'] = employee.pop('JobTitle', None)
+            jobclass = 'otherhcp'
 
         case 'Admin':
-            job_class_params['JobTitle'] = employee.pop('JobTitle', None)
-            job_class_table = 'admin'
+            jobclass_data['JobTitle'] = employee.pop('JobTitle', None)
+            jobclass = 'admin'
 
         case _:
-            print("Invalid JobClass! (" + job_class + ")")
+            print("Invalid JobClass! (" + jobclass + ")")
             return False
     
+    EmpID = db.insert('employee', employee)
 
-
-    cnx = db.get_connection()
-
-    if(cnx and cnx.is_connected()):
-        with cnx.cursor(dictionary = True) as cursor:
-            # https://blog.finxter.com/5-best-ways-to-insert-python-dictionaries-into-mysql/
-
-            # Insert values in employee table
-            placeholders = ', '.join(['%s'] * len(employee))
-            columns = ', '.join(employee.keys())
-            sql = "INSERT INTO employee (%s) VALUES (%s)" % (columns, placeholders)
-
-            print("sql:")
-            print(sql)
-            print("employee.values():")
-            print(employee.values())
-
-            cursor.execute(sql, list(employee.values()))
-
-            # Insert values in job class table
-            EmpID = cursor.lastrowid
-            job_class_params['EmpID'] = EmpID
-
-            placeholders = ', '.join(['%s'] * len(job_class_params))
-            columns = ', '.join(job_class_params.keys())
-            sql = "INSERT INTO %s (%s) VALUES (%s)" % (job_class_table, columns, placeholders)
-
-            cursor.execute(sql, list(job_class_params.values()))
-        cnx.commit()
-        cnx.close()
+    if(EmpID == -1):
+        print("Error! Could not create employee.")
+        return False
     
-    return job_class_params['EmpID']
+    jobclass_data['EmpID'] = EmpID
+    db.insert(jobclass, jobclass_data)
+
+    return EmpID
 
 
 def update(employee):
-    print("employee.update() called!")
+    print(f"employee.update({employee}) called!")
+
+    if(not employee or not isinstance(employee, dict)):
+        return False
+
+    # Validate date and int
+    employee['HireDate'] = validate_date(employee.get('HireDate', None))
+    employee['SSN'] = validate_int(employee.get('SSN', None))
+
+    return db.update('employee', 'EmpID', employee)
+
+def update_employee_jobclass(jobclass_data):
+    print(f"employee.update_employee_jobclass({jobclass_data}) called!")
+
+    if(not jobclass_data or not isinstance(jobclass_data, dict)):
+        return False
+
+    NewJobClassAttr = jobclass_data.get('NewJobClass', None)
+    NewJobClass = _jobclass_to_table_name(jobclass_data.pop('NewJobClass', None))
+    OldJobClass = _jobclass_to_table_name(jobclass_data.pop('OldJobClass', None))
+    EmpID = jobclass_data.get('EmpID', None)
+
+    if is_empty_string(NewJobClass) or is_empty_string(OldJobClass) or is_empty_string(EmpID):
+        return False
+
+    # Validate BC_Date for doctors
+    BC_Date = jobclass_data.get('BC_Date', None)
+    if(BC_Date):
+        jobclass_data['BC_Date'] = validate_date(BC_Date)
+
+    # If not changing jobclass, update
+    if(NewJobClass == OldJobClass):
+        print("Keeping same jobclass")
+        db.update(NewJobClass, 'EmpID', jobclass_data)
+    # Else, delete old jobclass and insert new
+    else:
+        print(f"Changing jobclass {OldJobClass} to {NewJobClass}")
+        db.insert(NewJobClass, jobclass_data)
+        db.delete(OldJobClass, 'EmpID', EmpID)
+        db.update('employee', 'EmpID', {'EmpID': EmpID, 'JobClass':NewJobClassAttr})
+    
+    return True
+
 
 def delete(id):
     employee = db.select('employee', 'EmpID', id)
-    job_class = employee.get('JobClass', None)
-    job_class_table = ''
+    jobclass = _jobclass_to_table_name(employee.get('JobClass', None))
     
-    match job_class:
-        case 'Doctor':
-            job_class_table = 'doctor'
-
-        case 'Nurse':
-            job_class_table = 'nurse'
-
-        case 'Other HCP':
-            job_class_table = 'otherhcp'
-
-        case 'Admin':
-            job_class_table = 'admin'
-
-        case _:
-            job_class_table = None
-    
-    if(job_class_table):
-        db.delete(job_class_table, 'EmpID', id)
+    if(jobclass):
+        db.delete(jobclass, 'EmpID', id)
 
     return db.delete('employee', 'EmpID', id)
+
+
+def _jobclass_to_table_name(jobclass):
+    match jobclass:
+        case 'Doctor':
+            return 'doctor'
+
+        case 'Nurse':
+            return 'nurse'
+
+        case 'Other HCP':
+            return 'otherhcp'
+
+        case 'Admin':
+            return 'admin'
+
+        case _:
+            return None

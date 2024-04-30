@@ -32,12 +32,13 @@ def new_employee_page(JobClass):
 def api_new_employee():
     form_dict = {k: v for k, v in request.form.items()}
     result = employee.create(form_dict)
+    messa
     if(result):
         return redirect(url_for('efm_page', 
                                 message=f'New employee created (id:{result})'))
     else:
         return redirect(url_for('efm_page',
-                                message='Error encountered while attempting to create empployee!'))
+                                message='Error encountered while attempting to create employee!'))
 
 
 # Update employee
@@ -50,8 +51,16 @@ def update_employee_page(EmpID):
 
 @app.route('/api/UpdateEmployee', methods=['POST'])
 def api_update_employee():
+    form_dict = {k: v for k, v in request.form.items()}
+    EmpID = employee.update(form_dict)
+
+    if EmpID:
+        result = f"Employee updated (id:{EmpID})"
+    else:
+        result = "Could not update employee"
+
     return redirect(url_for('efm_page',
-                            message='Employee updated'))
+                            message=result))
 
 @app.route('/UpdateEmployeeJobClass/<EmpID>/<JobClass>')
 def update_employee_jobclass_page(EmpID, JobClass):
@@ -76,8 +85,18 @@ def update_employee_jobclass_page(EmpID, JobClass):
 
 @app.route('/api/UpdateEmployeeJobClass', methods=['POST'])
 def api_update_employee_jobclass():
+    form_dict = {k: v for k, v in request.form.items()}
+
+    result = employee.update_employee_jobclass(form_dict)
+
+    message = ''
+    if(result):
+        message = 'Employee JobClass updated'
+    else:
+        message = 'Encountered an error while attempting Employee JobClass update'
+
     return redirect(url_for('efm_page',
-                            message='Employee JobClass updated'))
+                            message=message))
 
 
 # Delete employee
