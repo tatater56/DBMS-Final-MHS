@@ -135,7 +135,7 @@ def new_facility_page(FType):
 @app.route('/api/NewFacility', methods=['POST'])
 def api_new_facility():
     form_dict = {k: v for k, v in request.form.items()}
-    
+
     result = facility.create(form_dict)
     if(result):
         message = f'New facility created (id:{result})'
@@ -144,3 +144,30 @@ def api_new_facility():
 
     return redirect(url_for('efm_page', 
                         message=message))
+
+
+# Delete facility
+
+@app.route('/DeleteFacility/<FacID>')
+def delete_facility_page(FacID):
+    return render_template('facility/delete.html',
+                            facility=facility.get(FacID))
+
+@app.route('/api/DeleteFacility/<FacID>')
+def api_delete_facility(FacID):
+    if(util.is_empty_string(FacID)):
+        return redirect(url_for('efm_page',
+                                message='Facility could not be deleted, no FacID given'))
+    else:
+        result = ''
+        if facility.delete(FacID):
+            result = f'Facility deleted (id:{FacID})'
+        else:
+            result = f'Error encountered, could not delete facility (id:{FacID})'
+        
+        return redirect(url_for('efm_page',
+                                message=result))
+
+
+# TODO: Update facility
+

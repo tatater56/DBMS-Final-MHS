@@ -61,5 +61,11 @@ def update(facility):
     pass
 
 def delete(id):
-    pass
+    facility = db.select('facility', 'FacID', id)
+    ftype = str(facility.get('FType', '')).lower()
+    
+    if(not is_empty_string(ftype)):
+        db.delete(ftype, 'FType', id)
+
+    return db.delete('facility', 'FacID', id)
     

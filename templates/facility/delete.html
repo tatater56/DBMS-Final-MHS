@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>MHS - Delete employee</title>
+    <title>MHS - Delete facility</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
@@ -15,20 +15,20 @@
         {% endif %}
         
         <h1>Morris Health Services</h1>
-        <h2>Delete employee</h2>
+        <h2>Delete facility</h2>
     </header>
     <main>
-        {% if employee %}
-            <p>Are you sure you want to delete this employee?</p>
-            <p>EmpID: {{ employee['EmpID'] }}</p>
-            <p>Name: {{ employee['FName'] + ' ' + employee['Minit'] + ' ' + employee['LName'] }}</p>
-            <p>JobClass: {{ employee['JobClass'] }}</p>
-            <form action="/api/DeleteEmployee/{{ employee['EmpID'] }}" method="get">
+        {% if facility %}
+            <p>Are you sure you want to delete this facility?</p>
+            <p>FacID: {{ facility['FacID'] }}</p>
+            <p>Name: {{ facility['Name'] }}</p>
+            <p>FType: {{ facility['FType'] }}</p>
+            <form action="/api/DeleteFacility/{{ facility['FacID'] }}" method="get">
                 <input type="submit" value="Delete">
             </form>
         
         {% else %}
-            <section class="message">Invalid employee</section>
+            <section class="message">Invalid facility</section>
         {% endif %}
     </main>
     <footer>
