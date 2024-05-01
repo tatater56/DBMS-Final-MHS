@@ -135,11 +135,12 @@ def new_facility_page(FType):
 @app.route('/api/NewFacility', methods=['POST'])
 def api_new_facility():
     form_dict = {k: v for k, v in request.form.items()}
-    result = faclity.create(form_dict)
+    
+    result = facility.create(form_dict)
     if(result):
-        message = f'New employee created (id:{result})'
+        message = f'New facility created (id:{result})'
     else:
-        message = 'Error encountered while attempting to create employee!'
+        message = 'Error encountered while attempting to create facility!'
 
     return redirect(url_for('efm_page', 
                         message=message))

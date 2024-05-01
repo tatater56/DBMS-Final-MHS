@@ -40,8 +40,20 @@
             {% if FType == 'OPS' %}
                 <input type="hidden" id="FType" name="FType" value="OPS">
 
+                <label for="Room_Count">Room_Count:</label><br>
+                <input type="number" step="1" min="0" id="Room_Count" name="Room_Count"><br><br>
+
+                <label for="P_code">P_code:</label><br>
+                <input type="text" id="P_code" name="P_code"><br><br>
+
+                <label for="Description">Description:</label><br>
+                <input type="text" id="Description" name="Description"><br><br>
+
             {% elif FType == 'Office' %}
                 <input type="hidden" id="FType" name="FType" value="Office">
+
+                <label for="Office_Count">Office_Count:</label><br>
+                <input type="number" step="1" min="0" id="Office_Count" name="Office_Count"><br><br>
 
             {% else %}
                 <section class="message">Warning! Invalid FType: {{FType}}</section>
