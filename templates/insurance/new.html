@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - New insurance</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <header>
+        {% if(message) %}
+        <section class="message">
+            <p>Message: {{ message }}</p>
+        </section>
+        {% endif %}
+        
+        <h1>Morris Health Services</h1>
+        <h2>Add New Insurance</h2>
+    </header>
+    <main>
+        <form action="/api/NewInsurance" method="post">
+            <label for="Name">Name:</label><br>
+            <input type="text" id="Name" name="Name"><br><br>
+            
+            <label for="Street">Street:</label><br>
+            <input type="text" id="Street" name="Street"><br><br>
+            
+            <label for="City">City:</label><br>
+            <input type="text" id="City" name="City"><br><br>
+            
+            <label for="State">State:</label><br>
+            <input type="text" id="State" name="State"><br><br>
+            
+            <label for="Zip">Zip:</label><br>
+            <input type="text" id="Zip" name="Zip"><br><br>
+            
+            <input type="submit" value="Create facility">
+        </form>
+    </main>
+    <footer>
+        <p><a href="/EmployeeFacilityManagement">⏎ Return to Employee Facility Management</a></p>
+    </footer>
+</body>
+
+</html>
