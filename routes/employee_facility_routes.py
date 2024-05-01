@@ -124,4 +124,22 @@ def api_delete_employee(EmpID):
                                 message=result))
 
 
-# TODO: facilities
+
+# New facility
+
+@app.route('/NewFacility/<FType>')
+def new_facility_page(FType):
+    return render_template('facility/new.html',
+                            FType=FType)
+
+@app.route('/api/NewFacility', methods=['POST'])
+def api_new_facility():
+    form_dict = {k: v for k, v in request.form.items()}
+    result = faclity.create(form_dict)
+    if(result):
+        message = f'New employee created (id:{result})'
+    else:
+        message = 'Error encountered while attempting to create employee!'
+
+    return redirect(url_for('efm_page', 
+                        message=message))

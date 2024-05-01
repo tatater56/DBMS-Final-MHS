@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - Delete employee</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <header>
+        {% if(message) %}
+        <section class="message">
+            <p>Message: {{ message }}</p>
+        </section>
+        {% endif %}
+        
+        <h1>Morris Health Services</h1>
+        <h2>Delete employee</h2>
+    </header>
+    <main>
+        {% if employee %}
+            <p>Are you sure you want to delete this employee?</p>
+            <p>EmpID: {{ employee['EmpID'] }}</p>
+            <p>Name: {{ employee['FName'] + ' ' + employee['Minit'] + ' ' + employee['LName'] }}</p>
+            <p>JobClass: {{ employee['JobClass'] }}</p>
+            <form action="/api/DeleteEmployee/{{ employee['EmpID'] }}" method="get">
+                <input type="submit" value="Delete">
+            </form>
+        
+        {% else %}
+            <section class="message">Invalid employee</section>
+        {% endif %}
+    </main>
+    <footer>
+        <p><a href="/EmployeeFacilityManagement">⏎ Return to Employee Facility Management</a></p>
+    </footer>
+</body>
+
+</html>
