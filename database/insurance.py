@@ -1,6 +1,6 @@
 import database.db as db
 
-from util import validate_int, is_empty_string
+from util import validate_form_input
 
 def get_all():
     print("insurance.get_all() called!")
@@ -16,6 +16,7 @@ def create(insurance):
     if(not insurance or not isinstance(insurance, dict)):
         return False
     
+    validate_form_input(insurance)
     return db.insert('insurancecompany', insurance)
 
 def update(insurance):

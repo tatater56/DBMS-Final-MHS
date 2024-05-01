@@ -18,7 +18,92 @@
         <h2>Patient Management (appointments, procedures and billing)</h2>
     </header>
     <main>
-        <p>Page content goes here.</p>
+        <details>
+            <summary><b>Patients</b></summary>
+            <h3>Patient details</h3>
+            <a href="/NewPatient">🗐 Add new patient</a>
+            <br><br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>P_id</th>
+                        <th>FName</th>
+                        <th>Minit</th>
+                        <th>LName</th>
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                        <th>Ins_id</th>
+                        <th>PrimaryDoctorID</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient["P_id"] }}</td>
+                        <td>{{ patient["FName"] }}</td>
+                        <td>{{ patient["Minit"] }}</td>
+                        <td>{{ patient["LName"] }}</td>
+                        <td>{{ patient["Street"] }}</td>
+                        <td>{{ patient["City"] }}</td>
+                        <td>{{ patient["State"] }}</td>
+                        <td>{{ patient["Zip"] }}</td>
+                        <td>{{ patient["Ins_id"] }}</td>
+                        <td>{{ patient["PrimaryDoctorID"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdatePatient/{{patient['P_id']}}">🖆 Update</a>
+                                <a href="/api/DeletePatient/{{patient['P_id']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </details>
+        <details>
+            <summary><b>Appointments</b></summary>
+            <h3>Appointment details</h3>
+            <a href="/NewAppointment">🗐 Add new Appointment </a>
+            <br><br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>AppID</th>
+                        <th>Doctor_ID</th>
+                        <th>P_id</th>
+                        <th>Date_Time</th>
+                        <th>FacID</th>
+                        <th>InvID</th>
+                        <th>Cost</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment["AppID"] }}</td>
+                        <td>{{ appointment["Doctor_ID"] }}</td>
+                        <td>{{ appointment["P_id"] }}</td>
+                        <td>{{ appointment["Date_Time"] }}</td>
+                        <td>{{ appointment["FacID"] }}</td>
+                        <td>{{ appointment["InvID"] }}</td>
+                        <td>{{ appointment["Cost"] }}</td>
+                        <td>{{ appointment["Description"] }}</td>
+                        <td>
+                            <p>
+                                <a href="/UpdateAppointment/{{appointment['AppID']}}">🖆 Update</a>
+                                <a href="/api/DeleteAppointment/{{appointment['AppID']}}">🗑 Delete</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </details>
     </main>
     <footer>
         <p><a href="/">⏎ Return to main menu</a></p>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MHS - New appointment</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <header>
+        {% if(message) %}
+        <section class="message">
+            <p>Message: {{ message }}</p>
+        </section>
+        {% endif %}
+        
+        <h1>Morris Health Services</h1>
+        <h2>Add New Appointment</h2>
+    </header>
+    <main>
+        <form action="/api/NewAppointment" method="post">
+
+            <label for="Doctor_ID">Doctor:</label><br>
+            <select id="Doctor_ID" name="Doctor_ID">
+                {% for doctor in doctors %}
+                    <option value="{{ doctor['EmpID'] }}">{{doctor['FName']}} {{doctor['Minit']}} {{doctor['LName']}} (id:{{doctor['EmpID']}})</option>
+                {% endfor %}
+            </select><br><br>
+
+            <label for="P_id">Patient:</label><br>
+            <select id="P_id" name="P_id">
+                {% for patient in patients %}
+                    <option value="{{ patient['P_id'] }}">{{patient['FName']}} {{patient['Minit']}} {{patient['LName']}} (id:{{patient['P_id']}})</option>
+                {% endfor %}
+            </select><br><br>
+
+            <label for="FacID">Facility:</label><br>
+            <select id="FacID" name="FacID">
+                {% for facility in facilities %}
+                    <option value="{{ facility['FacID'] }}">{{facility['Name']}} ({{facility['FType']}}) (id:{{facility['FacID']}})</option>
+                {% endfor %}
+            </select><br><br>
+
+            <label for="Date_Time">Date, Time:</label><br>
+            <input type="datetime-local" id="Date_Time" name="Date_Time" required><br><br>
+
+            <label for="Cost">Cost:</label><br>
+            <input type="number" step="0.01" min="0" id="Cost" name="Cost" value="0"><br><br>
+
+            <input type="submit" value="Create appointment">
+        </form>
+    </main>
+    <footer>
+        <p><a href="/PatientManagement">⏎ Return to Patient Management</a></p>
+    </footer>
+</body>
+
+</html>

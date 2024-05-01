@@ -1,12 +1,33 @@
 import database.db as db
 
-from util import validate_date, validate_int, is_empty_string
+from util import validate_date, validate_int, is_empty_string, validate_form_input
 
 def get_all():
     return db.select_all('employee')
 
 def get_all_doctors():
     return db.select_all('doctor')
+
+def get_all_doctors_with_names():
+    cnx = db.get_connection()
+    results = []
+
+    try:
+        if(cnx and cnx.is_connected()):
+            with cnx.cursor(dictionary=True) as cursor:
+                cursor.execute('''
+                    SELECT  EmpID, FName, Minit, LName
+                    FROM    employee e
+                    WHERE   e.JobClass = 'Doctor';
+                ''')
+                results = cursor.fetchall()
+    except Exception as e:
+        print(e)
+        return []
+    finally:
+        cnx.close()
+    
+    return results
 
 def get_all_admins():
     return db.select_all('admin')
@@ -102,6 +123,7 @@ def create(employee):
             print("Invalid JobClass! (" + jobclass + ")")
             return False
     
+    validate_form_input(employee)
     EmpID = db.insert('employee', employee)
 
     if(EmpID == -1):
@@ -109,6 +131,7 @@ def create(employee):
         return False
     
     jobclass_data['EmpID'] = EmpID
+    validate_form_input(jobclass_data)
     db.insert(jobclass, jobclass_data)
 
     return EmpID
@@ -124,6 +147,7 @@ def update(employee):
     employee['HireDate'] = validate_date(employee.get('HireDate', None))
     employee['SSN'] = validate_int(employee.get('SSN', None))
 
+    validate_form_input(employee)
     return db.update('employee', 'EmpID', employee)
 
 def update_employee_jobclass(jobclass_data):
@@ -144,6 +168,8 @@ def update_employee_jobclass(jobclass_data):
     BC_Date = jobclass_data.get('BC_Date', None)
     if(BC_Date):
         jobclass_data['BC_Date'] = validate_date(BC_Date)
+
+    validate_form_input(jobclass_data)
 
     # If not changing jobclass, update
     if(NewJobClass == OldJobClass):

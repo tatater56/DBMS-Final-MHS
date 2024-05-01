@@ -69,6 +69,8 @@ def insert(table_name, data):
     
     cnx = get_connection()
     result = -1
+
+    print(data)
     
     try:
         if(cnx and cnx.is_connected()):

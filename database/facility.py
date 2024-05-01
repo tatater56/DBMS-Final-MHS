@@ -1,6 +1,6 @@
 import database.db as db
 
-from util import validate_int, is_empty_string
+from util import validate_int, is_empty_string, validate_form_input
 
 def get_all():
     print("facility.get_all() called!")
@@ -46,6 +46,7 @@ def create(facility):
             print("Invalid JobClass! (" + jobclass + ")")
             return False
     
+    validate_form_input(facility)
     FacID = db.insert('facility', facility)
 
     if(FacID == -1):
@@ -53,6 +54,7 @@ def create(facility):
         return False
     
     ftype_data['FacID'] = FacID
+    validate_form_input(ftype_data)
     db.insert(ftype, ftype_data)
 
     return FacID

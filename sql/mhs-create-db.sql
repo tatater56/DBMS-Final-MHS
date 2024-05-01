@@ -155,6 +155,7 @@ CREATE TABLE `invoice` (
 -- Dumping structure for table mhs.makesappointment
 DROP TABLE IF EXISTS `makesappointment`;
 CREATE TABLE `makesappointment` (
+  `AppID` int(11) NOT NULL AUTO_INCREMENT,
   `Doctor_ID` int(11) NOT NULL,
   `P_id` int(11) NOT NULL,
   `Date_Time` datetime NOT NULL,
@@ -162,7 +163,7 @@ CREATE TABLE `makesappointment` (
   `InvID` int(11) DEFAULT NULL,
   `Cost` decimal(20,2) DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`Doctor_ID`,`P_id`,`Date_Time`),
+  PRIMARY KEY (`AppID`),
   KEY `FK_makesappointment_facility` (`FacID`),
   KEY `FK_makesappointment_invoice` (`InvID`),
   KEY `FK_makesappointment_patient` (`P_id`),
